@@ -1,97 +1,87 @@
 #include <stdio.h>
 #include <conio.h>
-#define MAXSIZE 10 
+#define MAXSIZE 10
 
 
-int cq[MAXSIZE], rear = -1, front = -1;
 
-int Insert(){
+
+int queue[MAXSIZE];
+int rear = -1, front = 0;
+
+
+
+
+int insert(){
     int n;
-    if((rear+1)%MAXSIZE == front){
-        printf("circular queue is overflown\n");
+    if(rear == MAXSIZE -1){
+        printf("queue will overflow");
     }
     
     else{
-        printf("Enter an element \n");
+        printf("Enter the value to insert\n");
         scanf("%d", &n);
+        rear++;  
+        queue[rear] = n;
     }
+}
 
-    if(rear == -1 && front == -1){
-        rear = 0;
-        front = 0;
+
+int delete(){
+    int n;
+    if(front>rear){
+        printf("queue is empty");
     }
 
     else{
-        rear = (rear+1)%MAXSIZE;
-        if((rear+1)%MAXSIZE == front){
-        printf("circular queue will is overflow\n");
+        n = queue[front];
+        printf("Deleted element is :- %d", n);
+        front++;
     }
-    }
-
-    cq[rear] = n;
 }
 
 
-int Delete(){
-    if(rear == -1 && front == -1){
-        printf("queue is empty\n");
+int display(){
+    if(front>rear){
+        printf("queue is empty");
     }
-
+    
     else{
-
-        int n = cq[front];
-
-        if(rear == front){
-            rear = -1;
-            front = -1;
+        int i;
+        printf("Queue Elements are:-\n");
+        for(i = rear; i>=front; i--){
+            printf("%d\t", queue[i]);
         }
-
-        else{
-            front = (front+1)%MAXSIZE;
-        }
-
-        printf("Deleted element is %d\n", n);
     }
 }
 
-int Display(){
-    int i;
-    if(rear == 1 && front == -1){
-        printf("Queue is empty");
-    }
-
-    for(i=front;i!=rear;i=(i+1)%MAXSIZE){
-        printf("%5d\n", cq[i]);
-    }
-    printf("%5d\n", cq[i]);
-}
 
 void main(){
-int choice;
+    
+    int choice;
     do{
-        printf("Enter your choice\n");
-        printf("\n1.insert\n2.delete\n3.display\n");
+        printf("\n-----queue-------");
+        printf("\n1.insert\n2.delete\n3.display");
+        printf("\n-----------------");
+        printf("\nEnter your choice\n");
         scanf("%d", &choice);
-
-        switch(choice){
+        switch(choice)
+        {
             case 1:
-                Insert();
+                insert();
                 break;
 
             case 2:
-                Delete();
+                delete();
                 break;
 
             case 3:
-                Display();
+                display();
                 break;
-
-            default:
-                printf("Invalid choice\n");
-                break;
+                
+            // default:
+            //     printf("Invalid choice");
+            //     break;
         }
     }
     while(choice != 4);
 }
-
-
