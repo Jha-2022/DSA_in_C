@@ -7,28 +7,30 @@ int cq[MAXSIZE], rear = -1, front = -1;
 
 int Insert(){
     int n;
-    if((rear+1)%MAXSIZE == front){
+    if((rear+1)%MAXSIZE == front)
         printf("circular queue is overflown\n");
-    }
+    
     
     else{
         printf("Enter an element \n");
         scanf("%d", &n);
-    }
+    
 
-    if(rear == -1 && front == -1){
-        rear = 0;
-        front = 0;
-    }
+        if(front == -1 && rear == -1)
+        {    rear = 0;
+            front = 0;
+        }
 
-    else{
-        rear = (rear+1)%MAXSIZE;
-        if((rear+1)%MAXSIZE == front){
-        printf("circular queue will is overflow\n");
+        else{
+            rear = (rear+1)%MAXSIZE;
+        }
+            
+        cq[rear] = n;
+        
+            
+            // if((rear+1)%MAXSIZE == front){
+            // printf("circular queue will is overflow\n")
     }
-    }
-
-    cq[rear] = n;
 }
 
 
@@ -56,12 +58,12 @@ int Delete(){
 
 int Display(){
     int i;
-    if(rear == 1 && front == -1){
+    if(rear == -1 && front == -1){
         printf("Queue is empty");
     }
 
     for(i=front;i!=rear;i=(i+1)%MAXSIZE){
-        printf("%5d\n", cq[i]);
+        printf("%5d", cq[i]);
     }
     printf("%5d\n", cq[i]);
 }
